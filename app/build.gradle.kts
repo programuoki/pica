@@ -1,20 +1,19 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.room)
 }
 
 android {
     namespace = "eif.viko.lt.pica"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "eif.viko.lt.pica"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 
@@ -56,16 +55,20 @@ dependencies {
 
 
     // KOIN
-
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)              // startKoin, androidContext, Application setup
     implementation(libs.koin.androidx.compose)     // koinViewModel() in composables
     implementation(libs.koin.compose.navigation3)  // Nav3 integration
 
+    // RETROFIT
+    implementation(libs.retrofit)
 
+    // ROOM
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
 
-
-
-
-
+}
+room {
+    schemaDirectory("$projectDir/schemas")
 }
