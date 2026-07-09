@@ -22,7 +22,7 @@ val coreModule = module {
     }
     single<Retrofit> {
         Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8080/")  // 10.0.2.2 = localhost from emulator
+            .baseUrl("https://pica.programuoki.lt/")  // 10.0.2.2 = localhost from emulator
             .client(get())
             .addConverterFactory(
                 get<Json>().asConverterFactory("application/json".toMediaType())
