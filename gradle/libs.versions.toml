@@ -18,7 +18,9 @@ ksp = "2.3.9"  # alternative to Annotation processing
 room = "2.8.4" # SQLITE DB ORM
 
 datastore = "1.2.1"        # or check current stable
-tink = "1.23.0"            # or check current stable
+tink = "1.23.0"
+navigation3Runtime = "1.1.4"
+navigation3Ui = "1.1.4"            # or check current stable
 
 
 [libraries]
@@ -53,6 +55,8 @@ room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 tink-android = { module = "com.google.crypto.tink:tink-android", version.ref = "tink" }
+androidx-navigation3-runtime = { group = "androidx.navigation3", name = "navigation3-runtime", version.ref = "navigation3Runtime" }
+androidx-navigation3-ui = { group = "androidx.navigation3", name = "navigation3-ui", version.ref = "navigation3Ui" }
 
 
 [plugins]

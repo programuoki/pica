@@ -23,17 +23,15 @@ class SecureTokenStorage(
     private val context: Application
 ) : TokenStorage {
 
-    private val Context.dataStore by preferencesDataStore(name = "auth_prefs")
-
-    private val TOKEN_KEY = stringPreferencesKey("auth_token")
+    private val Context.dataStore by preferencesDataStore(name = DATASTORE_NAME)
 
     // Configure Tink AEAD
     private val aead: Aead by lazy {
         AeadConfig.register()
         val keysetHandle: KeysetHandle = AndroidKeysetManager.Builder()
-            .withSharedPref(context, "master_keyset", "master_prefs")
+            .withSharedPref(context, MASTER_KEYSET, MASTER_PREFS)
             .withKeyTemplate(AesGcmKeyManager.aes256GcmTemplate())
-            .withMasterKeyUri("android-keystore://master_key")
+            .withMasterKeyUri(MASTER_KEY_URI)
             .build()
             .keysetHandle
         keysetHandle.getPrimitive(RegistryConfiguration.get(), Aead::class.java)
@@ -92,5 +90,13 @@ class SecureTokenStorage(
         } catch (e: Exception) {
             true // invalid = expired
         }
+    }
+
+    private companion object {
+        private const val DATASTORE_NAME = "auth_prefs"
+        private val TOKEN_KEY = stringPreferencesKey("auth_token")
+        private const val MASTER_KEYSET = "master_keyset"
+        private const val MASTER_PREFS = "master_prefs"
+        private const val MASTER_KEY_URI = "android-keystore://master_key"
     }
 }
