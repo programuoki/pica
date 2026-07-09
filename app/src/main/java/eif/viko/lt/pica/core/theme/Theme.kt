@@ -1,6 +1,5 @@
-package eif.viko.lt.pica.ui.theme
+package eif.viko.lt.pica.core.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

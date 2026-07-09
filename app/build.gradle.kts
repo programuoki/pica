@@ -62,11 +62,19 @@ dependencies {
 
     // RETROFIT
     implementation(libs.retrofit)
+    implementation(libs.retrofit.kotlinx.serialization)
+    implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.kotlinx.serialization.json)
 
     // ROOM
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
+
+    // crypto secure storage
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.tink.android)
+
 
 }
 room {

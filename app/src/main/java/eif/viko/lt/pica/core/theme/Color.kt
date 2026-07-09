@@ -1,4 +1,4 @@
-package eif.viko.lt.pica.ui.theme
+package eif.viko.lt.pica.core.theme
 
 import androidx.compose.ui.graphics.Color
 

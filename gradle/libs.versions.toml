@@ -11,9 +11,14 @@ composeBom = "2026.06.01"
 
 koin-bom = "4.2.2"  # Stable version
 retrofit = "3.0.0" # Web Request use
+okhttp = "5.4.0"
+kotlinx-serialization = "1.11.0"
 
 ksp = "2.3.9"  # alternative to Annotation processing
 room = "2.8.4" # SQLITE DB ORM
+
+datastore = "1.2.1"        # or check current stable
+tink = "1.23.0"            # or check current stable
 
 
 [libraries]
@@ -37,10 +42,17 @@ koin-android             = { module = "io.insert-koin:koin-android" }
 koin-androidx-compose    = { module = "io.insert-koin:koin-androidx-compose" }
 koin-compose-navigation3 = { module = "io.insert-koin:koin-compose-navigation3" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-kotlinx-serialization = { module = "com.squareup.retrofit2:converter-kotlinx-serialization", version.ref = "retrofit" }
+okhttp-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 
 room-runtime  = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-ktx      = { module = "androidx.room:room-ktx", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+
+
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
+tink-android = { module = "com.google.crypto.tink:tink-android", version.ref = "tink" }
 
 
 [plugins]
