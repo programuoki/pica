@@ -3,6 +3,7 @@ package eif.viko.lt.pica
 import android.app.Application
 import eif.viko.lt.pica.core.di.coreModule
 import eif.viko.lt.pica.feature.auth.di.authModule
+import eif.viko.lt.pica.feature.cart.di.cartModule
 import eif.viko.lt.pica.feature.menu.di.menuModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -18,7 +19,8 @@ class PicaApplication : Application(){
             modules(
                 coreModule,
                 menuModule,
-                authModule
+                authModule,
+                cartModule
             )
         }
     }

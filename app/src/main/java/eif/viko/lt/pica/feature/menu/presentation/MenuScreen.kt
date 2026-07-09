@@ -10,11 +10,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import eif.viko.lt.pica.feature.cart.presentation.CartEvent
+import eif.viko.lt.pica.feature.cart.presentation.CartViewModel
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.koinInject
 
 @Composable
 fun MenuScreen(
-    viewModel: MenuViewModel = koinViewModel()
+    viewModel: MenuViewModel = koinViewModel(),
+    cartViewModel: CartViewModel = koinInject()
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -45,6 +49,15 @@ fun MenuScreen(
                             Text(item.name, style = MaterialTheme.typography.titleMedium)
                             Text(item.description, style = MaterialTheme.typography.bodyMedium)
                             Text("€%.2f".format(item.price), style = MaterialTheme.typography.titleSmall)
+
+                            Spacer(Modifier.height(8.dp))
+
+                            Button(
+                                onClick = { cartViewModel.onEvent(CartEvent.AddItem(item)) },
+                                modifier = Modifier.align(Alignment.End)
+                            ) {
+                                Text("Add to cart")
+                            }
                         }
                     }
                 }
