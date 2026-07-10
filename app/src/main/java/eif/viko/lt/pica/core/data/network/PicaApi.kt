@@ -25,10 +25,19 @@ interface PicaApi {
 
     @POST("create-payment-intent")
     suspend fun createPaymentIntent(@Body request: PaymentIntentRequest): PaymentIntentResponse
+    @POST("auth/google")
+    suspend fun googleAuth(@Body request: GoogleAuthRequest): AuthResponse
+
 
 
 
 }
+
+@kotlinx.serialization.Serializable
+data class GoogleAuthRequest(
+    @SerialName("id_token") val idToken: String
+)
+
 
 // Request/response bodies — match your Go backend's JSON exactly
 @kotlinx.serialization.Serializable

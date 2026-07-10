@@ -52,6 +52,19 @@ class AuthViewModel(
         }
     }
 
+    fun googleSignIn(idToken: String) {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true, error = null) }
+            try {
+                repository.googleSignIn(idToken)
+                _uiState.update { it.copy(isLoading = false, isLoggedIn = true) }
+            } catch (e: Exception) {
+                _uiState.update { it.copy(isLoading = false, error = "Google sign-in failed") }
+            }
+        }
+    }
+
+
     fun logout(onLoggedOut: () -> Unit) {
         viewModelScope.launch {
             repository.logout()   // clears the token from SecureTokenStorage

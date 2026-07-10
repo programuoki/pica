@@ -7,8 +7,7 @@ import org.koin.dsl.module
 
 val menuModule = module {
     // Repository — Koin injects PicaApi (provided by coreModule)
-    single { MenuRepository(get()) }
-
+    single { MenuRepository(get(), get()) }   // PicaApi, MenuDao
     // ViewModel — Koin injects the repository
     viewModel { MenuViewModel(get()) }
 }

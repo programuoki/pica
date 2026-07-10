@@ -26,6 +26,7 @@ stripe = "23.11.1"    # verify current version on github.com/stripe/stripe-andro
 
 camerax = "1.6.1"
 mlkitBarcode = "17.3.0"
+googleid = "1.2.0"
 
 
 [libraries]
@@ -58,6 +59,7 @@ room-ktx      = { module = "androidx.room:room-ktx", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 
 
+
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 tink-android = { module = "com.google.crypto.tink:tink-android", version.ref = "tink" }
 androidx-navigation3-runtime = { group = "androidx.navigation3", name = "navigation3-runtime", version.ref = "navigation3Runtime" }
@@ -74,6 +76,11 @@ androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "
 androidx-camera-mlkit-vision = { module = "androidx.camera:camera-mlkit-vision", version.ref = "camerax" }
 mlkit-barcode-scanning = { module = "com.google.mlkit:barcode-scanning", version.ref = "mlkitBarcode" }
 
+
+# COIL IMAGE FROM INTERNET
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version = "3.5.0" }
+coil-network = { module = "io.coil-kt.coil3:coil-network-okhttp", version = "3.5.0" }
+googleid = { group = "com.google.android.libraries.identity.googleid", name = "googleid", version.ref = "googleid" }
 
 
 

@@ -1,7 +1,9 @@
 package eif.viko.lt.pica.core.di
 
+import androidx.room.Room
 import eif.viko.lt.pica.core.data.auth.SecureTokenStorage
 import eif.viko.lt.pica.core.data.auth.TokenStorage
+import eif.viko.lt.pica.core.data.local.PicaDatabase
 import eif.viko.lt.pica.core.data.network.AuthInterceptor
 import eif.viko.lt.pica.core.data.network.PicaApi
 import kotlinx.serialization.json.Json
@@ -35,4 +37,15 @@ val coreModule = module {
             .build()
     }
     single<PicaApi> { get<Retrofit>().create(PicaApi::class.java) }
+
+    single {
+        Room.databaseBuilder(
+            get(),                          // Application context
+            PicaDatabase::class.java,
+            "pica.db"
+        ).build()
+    }
+    single { get<PicaDatabase>().menuDao() }
+
+
 }

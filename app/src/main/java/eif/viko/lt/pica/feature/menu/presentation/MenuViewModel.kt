@@ -16,26 +16,38 @@ class MenuViewModel(
     val uiState: StateFlow<MenuUiState> = _uiState.asStateFlow()
 
     init {
-        onEvent(MenuEvent.LoadMenu)   // load automatically when created
+        observeMenu()
+        refresh()
     }
 
     fun onEvent(event: MenuEvent) {
         when (event) {
-            MenuEvent.LoadMenu -> loadMenu()
-            MenuEvent.Retry -> loadMenu()
+            MenuEvent.LoadMenu -> refresh()
+            MenuEvent.Retry -> refresh()
         }
     }
 
-    private fun loadMenu() {
+    // Observe the cache — emits instantly with cached data, re-emits when it changes
+    private fun observeMenu() {
         viewModelScope.launch {
-            _uiState.value = MenuUiState.Loading
+            repository.getMenu().collect { items ->
+                if (items.isNotEmpty()) {
+                    _uiState.value = MenuUiState.Success(items)
+                }
+            }
+        }
+    }
+
+    // Fetch from network → write to cache → the Flow above auto-emits the update
+    private fun refresh() {
+        viewModelScope.launch {
             try {
-                val items = repository.getMenu()
-                _uiState.value = MenuUiState.Success(items)
+                repository.refresh()
             } catch (e: Exception) {
-                _uiState.value = MenuUiState.Error(
-                    e.message ?: "Could not load menu"
-                )
+                // Only show error if there's no cached data already showing
+                if (_uiState.value !is MenuUiState.Success) {
+                    _uiState.value = MenuUiState.Error(e.message ?: "Could not load menu")
+                }
             }
         }
     }

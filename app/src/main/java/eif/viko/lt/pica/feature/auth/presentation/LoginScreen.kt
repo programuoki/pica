@@ -5,9 +5,11 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -16,6 +18,8 @@ fun LoginScreen(
     viewModel: AuthViewModel = koinViewModel()
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
 
     // When auth succeeds, navigate away
     LaunchedEffect(state.isLoggedIn) {
@@ -86,6 +90,31 @@ fun LoginScreen(
                 if (state.isLoginMode) "Don't have an account? Sign up"
                 else "Already have an account? Log in"
             )
+        }
+
+        // Divider
+        Spacer(Modifier.height(16.dp))
+        Text("or", color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Spacer(Modifier.height(16.dp))
+
+        // Google Sign-In
+        OutlinedButton(
+            onClick = {
+                scope.launch {
+                    try {
+                        val idToken = getGoogleIdToken(context)
+                        if (idToken != null) {
+                            viewModel.googleSignIn(idToken)
+                        }
+                    } catch (e: Exception) {
+                        // User cancelled the picker or no accounts available — ignore
+                    }
+                }
+            },
+            enabled = !state.isLoading,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Sign in with Google")
         }
     }
 }
