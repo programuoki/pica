@@ -4,6 +4,7 @@ package eif.viko.lt.pica.feature.auth.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import eif.viko.lt.pica.feature.auth.data.AuthRepository
+import eif.viko.lt.pica.feature.scan.data.TableSession
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -11,7 +12,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class AuthViewModel(
-    private val repository: AuthRepository
+    private val repository: AuthRepository,
+    private val tableSession: TableSession
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(AuthUiState())
@@ -47,6 +49,14 @@ class AuthViewModel(
                     it.copy(isLoading = false, error = "Login failed. Check your credentials.")
                 }
             }
+        }
+    }
+
+    fun logout(onLoggedOut: () -> Unit) {
+        viewModelScope.launch {
+            repository.logout()   // clears the token from SecureTokenStorage
+            tableSession.clearTable()    // ← clear table on logout
+            onLoggedOut()         // navigate back to login
         }
     }
 }

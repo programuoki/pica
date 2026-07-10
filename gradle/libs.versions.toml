@@ -21,6 +21,11 @@ datastore = "1.2.1"        # or check current stable
 tink = "1.23.0"
 navigation3Runtime = "1.1.4"
 navigation3Ui = "1.1.4"            # or check current stable
+stripe = "23.11.1"    # verify current version on github.com/stripe/stripe-android
+
+
+camerax = "1.6.1"
+mlkitBarcode = "17.3.0"
 
 
 [libraries]
@@ -57,6 +62,19 @@ androidx-datastore-preferences = { module = "androidx.datastore:datastore-prefer
 tink-android = { module = "com.google.crypto.tink:tink-android", version.ref = "tink" }
 androidx-navigation3-runtime = { group = "androidx.navigation3", name = "navigation3-runtime", version.ref = "navigation3Runtime" }
 androidx-navigation3-ui = { group = "androidx.navigation3", name = "navigation3-ui", version.ref = "navigation3Ui" }
+
+androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
+
+stripe-android = { module = "com.stripe:stripe-android", version.ref = "stripe" }
+
+
+androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "camerax" }
+androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "camerax" }
+androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "camerax" }
+androidx-camera-mlkit-vision = { module = "androidx.camera:camera-mlkit-vision", version.ref = "camerax" }
+mlkit-barcode-scanning = { module = "com.google.mlkit:barcode-scanning", version.ref = "mlkitBarcode" }
+
+
 
 
 [plugins]
